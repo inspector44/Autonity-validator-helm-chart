@@ -1,0 +1,15 @@
+#!/usr/bin/expect
+
+# Change to the root directory
+cd /
+
+# Ensure the k-keystore directory exists at the root
+system "mkdir -p /k-keystore"
+
+set timeout -1
+spawn aut account new --keyfile /k-keystore/agc.key
+expect "Password for new account:"
+send -- "$env(PASSWORD)\r"
+expect "Confirm account password:"
+send -- "$env(PASSWORD)\r"
+expect eof

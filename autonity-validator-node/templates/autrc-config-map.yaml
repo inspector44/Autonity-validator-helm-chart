@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: autrc-config
+  namespace: "{{ .Values.namespace }}"
+data:
+  .autrc: |
+    [aut]
+    rpc_endpoint = https://rpc1.piccadilly.autonity.org/

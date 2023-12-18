@@ -1,0 +1,18 @@
+namespace: autonity
+autonityNode:
+  image: "ghcr.io/autonity/autonity:latest"
+  nodePorts:
+    http: 8545
+    ws: 8546
+    p2p: 30303
+
+oracleService:
+  image: "ghcr.io/autonity/autonity-oracle-piccadilly:latest"
+  apiKeys:
+    forex_currencyfreaks: "forex_currencyfreaks_api_key"
+    forex_openexchangerate: "forex_openexchangerate_api_key"
+    forex_currencylayer: "forex_currencylayer_api_key"
+    forex_exchangerate: "forex_exchangerate_api_key"
+
+storage:
+  size: "10Gi"

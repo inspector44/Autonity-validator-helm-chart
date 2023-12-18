@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: oracle-config
+  namespace: "{{ .Values.namespace }}"
+data:
+  plugins-conf.yml: |
+    - name: forex_currencyfreaks
+      key: {{ .Values.oracleService.apiKeys.forex_currencyfreaks }}
+      refresh: 3600
+    - name: forex_openexchangerate
+      key: {{ .Values.oracleService.apiKeys.forex_openexchangerate }}
+      refresh: 3600
+    - name: forex_currencylayer
+      key: {{ .Values.oracleService.apiKeys.forex_currencylayer }}
+      refresh: 3600
+    - name: forex_exchangerate
+      key: {{ .Values.oracleService.apiKeys.forex_exchangerate }}
+      refresh: 3600

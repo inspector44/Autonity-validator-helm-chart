@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: autonity-node
+  namespace: "{{ .Values.namespace }}"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: autonity-node
+  template:
+    metadata:
+      labels:
+        app: autonity-node
+    spec:
+      containers:
+      - name: autonity
+        image: "{{ .Values.autonityNode.image }}"
+        ports:
+        - containerPort: {{ .Values.autonityNode.nodePorts.http }}
+        - containerPort: {{ .Values.autonityNode.nodePorts.ws }}
+        - containerPort: {{ .Values.autonityNode.nodePorts.p2p }}
+        volumeMounts:
+        - name: chaindata
+          mountPath: "/autonity-chaindata"
+      volumes:
+      - name: chaindata
+        persistentVolumeClaim:
+          claimName: autonity-chaindata-pvc

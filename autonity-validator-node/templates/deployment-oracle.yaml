@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: oracle-service
+  namespace: "{{ .Values.namespace }}"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: oracle-service
+  template:
+    metadata:
+      labels:
+        app: oracle-service
+    spec:
+      containers:
+      - name: oracle
+        image: "{{ .Values.oracleService.image }}"
+        env:
+        - name: NODE_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.hostIP
+        volumeMounts:
+        - name: oracle-keyfile
+          mountPath: "/autoracle/oracle.key"
+          subPath: oracle.key
+        - name: plugins-conf
+          mountPath: "/autoracle/plugins-conf.yml"
+          subPath: "plugins-conf.yml"
+        command: ["autonity-oracle"]
+        args:
+        - "-key.file=/autoracle/oracle.key"
+        - "-key.password={{ .Values.oracleService.keyPassword }}"
+        - "-ws=ws://${NODE_IP}:{{ .Values.autonityNode.nodePorts.ws }}"
+        - "-plugin.dir=/usr/local/bin/plugins/"
+        - "-plugin.conf=/autoracle/plugins-conf.yml"
+      volumes:
+      - name: oracle-keyfile
+        secret:
+          secretName: "{{ .Values.oracleService.keyFileSecret }}"
+      - name: plugins-conf
+        configMap:
+          name: "{{ .Values.oracleService.configMap }}"
