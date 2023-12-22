@@ -5,15 +5,31 @@ metadata:
   namespace: "{{ .Values.namespace }}"
 data:
   plugins-conf.yml: |
+    {{- with .Values.oracleService.apiKeys.forex_currencyfreaks }}
+    {{- if . }}
     - name: forex_currencyfreaks
-      key: {{ .Values.oracleService.apiKeys.forex_currencyfreaks }}
+      key: {{ . }}
       refresh: 3600
+    {{- end }}
+    {{- end }}
+    {{- with .Values.oracleService.apiKeys.forex_openexchangerate }}
+    {{- if . }}
     - name: forex_openexchangerate
-      key: {{ .Values.oracleService.apiKeys.forex_openexchangerate }}
+      key: {{ . }}
       refresh: 3600
+    {{- end }}
+    {{- end }}
+    {{- with .Values.oracleService.apiKeys.forex_currencylayer }}
+    {{- if . }}
     - name: forex_currencylayer
-      key: {{ .Values.oracleService.apiKeys.forex_currencylayer }}
+      key: {{ . }}
       refresh: 3600
+    {{- end }}
+    {{- end }}
+    {{- with .Values.oracleService.apiKeys.forex_exchangerate }}
+    {{- if . }}
     - name: forex_exchangerate
-      key: {{ .Values.oracleService.apiKeys.forex_exchangerate }}
+      key: {{ . }}
       refresh: 3600
+    {{- end }}
+    {{- end }}

@@ -2,8 +2,8 @@ namespace: autonity
 autonityNode:
   image: "ghcr.io/autonity/autonity:latest"
   nodePorts:
-    http: 8545
-    ws: 8546
+    http: 30001
+    ws: 30002
     p2p: 30303
 
 oracleService:

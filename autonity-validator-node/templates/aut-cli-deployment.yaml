@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: autonity-cli
-        image: your-repository/autonity-cli:latest
+        image: ghcr.io/inspector44/autonity-cli:latest
         volumeMounts:
         - name: keystore-volume
           mountPath: /k-keystore

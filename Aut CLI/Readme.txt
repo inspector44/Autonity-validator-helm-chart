@@ -1,2 +1,2 @@
-docker build -t repository/autonity-cli:latest .
-docker push repository/autonity-cli:latest
+docker build -t ghcr.io/inspector44/autonity-cli:latest .
+docker push ghcr.io/inspector44/autonity-cli:latest
